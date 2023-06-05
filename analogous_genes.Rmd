@@ -1,0 +1,24 @@
+---
+title: "analogous_genes"
+output: html_document
+Author: Dante von Zuben
+---
+
+Instalando e carregando pacotes necessários:
+
+```{r}
+BiocManager::install("GEOquery")
+BiocManager::install("RedeR")
+library(RedeR)
+library(GEOquery)
+```
+
+Adquirindo os dados do GSE e extraindo a matriz de expressão do dataset (salvando a matriz como "matriz_de_expressão"):
+
+```{r}
+getGEO( ... , GSEMatrix = TRUE)
+expressao <- exprs()
+write.csv(expressao, file = "matriz_de_expressão")
+```
+
+
