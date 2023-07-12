@@ -16,6 +16,8 @@ library(geneplast)
 library(dplyr)
 library(readr)
 
+set.seed(1)
+
 Astrocyte_Markers <- read.csv(file = "Astrocyte_Markers - Página1.csv", header = T)
 ```
 
@@ -26,20 +28,17 @@ ah <- AnnotationHub()
 
 meta <- query(ah, "geneplast")
 
-head(meta)
 
 load(meta[["AH83116"]])
 
 ogr <- groot.preprocess(cogdata=cogdata, phyloTree=phyloTree,cogids = Astrocyte_Markers$cog, spid="9606")
 
-set.seed(1)
 ogr <- groot(ogr, nPermutations=1000, verbose=FALSE)
 
 res <- groot.get(ogr, what="results")
-head(res)
 ```
 
-Plotando os enraizamentos dos genes de interesse
+Plotando as árvores com os enraizamentos dos genes de interesse
 ```{r}
 groot.plot(ogr, whichOG="COG0580", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
 groot.plot(ogr, whichOG="KOG0200", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
@@ -55,8 +54,6 @@ SOURCES <- list(
   EUKARYOTA_TREE = "https://raw.githubusercontent.com/dalmolingroup/neurotransmissionevolution/ctenophora_before_porifera/data/hybrid_tree_modified.nwk",
   CLADE_NAMES = "https://raw.githubusercontent.com/dalmolingroup/neurotransmissionevolution/ctenophora_before_porifera/analysis/geneplast_clade_names.tsv"
 )
-
-ogr <- groot(ogr, nPermutations = 1)
 
 lca_names <- read_table(SOURCES$CLADE_NAMES)
 
