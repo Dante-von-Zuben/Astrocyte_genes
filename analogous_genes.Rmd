@@ -41,11 +41,11 @@ head(res)
 
 Plotando os enraizamentos dos genes de interesse
 ```{r}
-groot.plot(ogr, whichOG="COG0580", cex.lab = 0.1, cex.nodes = 0.3)
-groot.plot(ogr, whichOG="KOG0200", cex.lab = 0.1, cex.nodes = 0.3)
-groot.plot(ogr, whichOG="COG1012", cex.lab = 0.1, cex.nodes = 0.3)
-groot.plot(ogr, whichOG="NOG07029", cex.lab = 0.1, cex.nodes = 0.3)
-groot.plot(ogr, whichOG="NOG26751", cex.lab = 0.1, cex.nodes = 0.3)
+groot.plot(ogr, whichOG="COG0580", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
+groot.plot(ogr, whichOG="KOG0200", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
+groot.plot(ogr, whichOG="COG1012", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
+groot.plot(ogr, whichOG="NOG07029", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
+groot.plot(ogr, whichOG="NOG26751", cex.lab = 0.1, cex.nodes = 0.3, fname="results/gproot")
 ```
 
 Nomeando os clados do enraizamento
@@ -66,6 +66,6 @@ groot_df <- res %>%
   left_join(lca_names) %>%
   left_join(Astrocyte_Markers, by = c("cog_id" = "cog"))
 
-write.csv(groot_df, file = "enraizamento_genes_astrocitos")
+write.csv(groot_df, file = "results/enraizamento_genes_astrocitos.csv", row.names = F)
 
 ```
