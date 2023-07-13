@@ -1,5 +1,5 @@
 ---
-title: "Inferência_de_raiz"
+title: "Inferência de raiz"
 output: html_document
 Author: Dante von Zuben
 ---
