@@ -7,18 +7,17 @@ Author: Dante von Zuben
 Chamando os pacotes e lendo o arquivo .csv com os genes de interesse
 
 ```{r}
-
 library(AnnotationHub)
-library(RedeR)
 library(igraph)
 library(RColorBrewer)
 library(geneplast)
 library(dplyr)
 library(readr)
+library(here)
 
 set.seed(1)
 
-Astrocyte_Markers <- read.csv(file = "Astrocyte_Markers - Página1.csv", header = T)
+Astrocyte_Markers <- read.csv(file = here("data/Astrocyte_Markers - Página1.csv"), header = T)
 ```
 
 
@@ -27,7 +26,6 @@ Carregando o dataset, criando uma conexão annotationHub e uma query para os rec
 ah <- AnnotationHub()
 
 meta <- query(ah, "geneplast")
-
 
 load(meta[["AH83116"]])
 
@@ -49,13 +47,9 @@ groot.plot(ogr, whichOG="NOG26751", cex.lab = 0.1, cex.nodes = 0.3, fname="resul
 
 Nomeando os clados do enraizamento
 ```{r}
-SOURCES <- list(
-  STRING_SPECIES = "https://stringdb-static.org/download/species.v11.5.txt",
-  EUKARYOTA_TREE = "https://raw.githubusercontent.com/dalmolingroup/neurotransmissionevolution/ctenophora_before_porifera/data/hybrid_tree_modified.nwk",
-  CLADE_NAMES = "https://raw.githubusercontent.com/dalmolingroup/neurotransmissionevolution/ctenophora_before_porifera/analysis/geneplast_clade_names.tsv"
-)
+CLADE_NAMES <- "https://raw.githubusercontent.com/dalmolingroup/neurotransmissionevolution/ctenophora_before_porifera/analysis/geneplast_clade_names.tsv"
 
-lca_names <- read_table(SOURCES$CLADE_NAMES)
+lca_names <- read_table(CLADE_NAMES)
 
 groot_df <- res %>%  
   tibble::rownames_to_column("cog_id") %>%
@@ -63,6 +57,6 @@ groot_df <- res %>%
   left_join(lca_names) %>%
   left_join(Astrocyte_Markers, by = c("cog_id" = "cog"))
 
-write.csv(groot_df, file = "results/enraizamento_genes_astrocitos.csv", row.names = F)
+write.csv(groot_df, file = here("results/enraizamento_genes_astrocitos.csv"), row.names = F)
 
 ```
