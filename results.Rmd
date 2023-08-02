@@ -1,0 +1,62 @@
+---
+title: "Astrocyte markers - Initial results"
+author: "Dante von Zuben e João Cavalcante"
+date: "`r Sys.setlocale('LC_TIME', 'C'); format(Sys.time(), '%d %B, %Y')`"
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = "reports/") })
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+    theme:
+      bslib: true
+      bootswatch: minty
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,  message = FALSE)
+
+library(here)
+library(DT)
+
+make_datatable <- function(data, colnames) {
+  data %>%
+    datatable(
+      .,
+      extensions = "Buttons",
+      rownames = FALSE,
+      escape = FALSE,
+      colnames = colnames,
+      filter = 'top',
+      options = list(
+        pageLength = 5,
+        scrollX = TRUE,
+        dom = '<"d-flex justify-content-between"lBf>rtip',
+        buttons = list(
+          'copy',
+          list(
+            extend = 'collection',
+            buttons = c('csv', 'excel'),
+            text = 'Download'
+          )
+        )
+      )
+    )
+}
+```
+
+## GenePlast results
+
+COG identifiers for each gene were acquired from the STRINGdb v11.5 COG mappings file.
+The rooting analysis was then performed for these COG IDs.
+
+:::{.column-body-outset}
+```{r geneplast-table}
+geneplast_roots <-
+  vroom::vroom(here("results/enraizamento_genes_astrocitos.csv"))
+
+make_datatable(geneplast_roots,
+               colnames = c("COG", "Root", "Clade", "Symbol", "ENSP"))
+```
+:::
