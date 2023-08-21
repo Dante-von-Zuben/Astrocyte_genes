@@ -60,3 +60,18 @@ make_datatable(geneplast_roots,
                colnames = c("COG", "Root", "Clade", "Symbol", "ENSP"))
 ```
 :::
+
+## Orthologs
+
+1-to-1 orthologs gathered through the Ensembl database. 
+When an ortholog is not present, it couldn't be found.
+
+:::{.column-body-outset}
+```{r ortho-table}
+orthologs <-
+  vroom::vroom(here("data/orthologs.csv"))
+
+make_datatable(orthologs,
+               colnames = c("H. sapiens", "M. musculus", "P. vitticeps", "L. striata domestica"))
+```
+:::
