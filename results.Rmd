@@ -75,3 +75,32 @@ make_datatable(orthologs,
                colnames = c("H. sapiens", "M. musculus", "P. vitticeps", "L. striata domestica"))
 ```
 :::
+
+## Future goals
+
+### Selected datasets
+
+- [PRJNA408230](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA408230) (DropSeq) - 2020
+  - Pallium expression in Pogona vitticeps (lizard species)
+  - 35 samples
+  
+- [GSE150486](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE150486) (10x) - 2020
+  - Gene expression in two song-production related regions in Lonchura striata domestica (Bengali Finch)
+  - 4 samples
+
+- [GSE230116](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE230116) (10x) - 2023 
+  - Astrocyte expression in mice (only WT samples will be used)
+  - 4 samples
+
+### Methodology
+
+- Data will be acquired from [SRA](https://www.ncbi.nlm.nih.gov/sra/) through the [nf-core/fetchngs](https://github.com/nf-core/fetchngs) pipeline.
+
+- Count matrices will be assembled through the [nf-core/scrnaseq](https://github.com/nf-core/scrnaseq) pipeline.
+
+- Matrices will be then processed in the R programming language.
+
+- All computational infrastructure will be provided by [NPAD/UFRN](http://npad.ufrn.br/).
+
+
+
