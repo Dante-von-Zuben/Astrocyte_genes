@@ -100,6 +100,8 @@ make_datatable(orthologs,
 
 - Matrices will be then processed in the R programming language.
 
+- Given download and processing time for all datasets, an expected timeline for preliminary results is the first week of November.
+
 - All computational infrastructure will be provided by [NPAD/UFRN](http://npad.ufrn.br/).
 
 
